@@ -1,0 +1,7 @@
+.navLink {
+  @apply mx-4 hover:text-orange-600;
+}
+
+.activeLink {
+  @apply underline hover:text-black;
+}

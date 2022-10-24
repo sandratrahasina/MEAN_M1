@@ -1,0 +1,12 @@
+<div class="card card__layout max-w-2xs">
+  <a [routerLink]="'/restaurants/' + restaurant.id">
+  <img class="h-48 card__image w-72" [src]="restaurant.photoUrl" [alt]="restaurant.nom">
+  <div class="card__details">
+    <div>
+      <h2 class="card__title">{{restaurant.nom}}</h2>
+      <h4>À {{restaurant.adresse}}</h4>
+    </div>
+    <button class="cta" type="button">Visiter</button>
+  </div>
+  </a>
+</div>

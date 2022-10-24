@@ -1,0 +1,9 @@
+<div class="card card__layout max-w-2xs">
+  <img class="items-center h-48 w-72 card__image" [src]="menu.photoUrl" [alt]="menu.nom">
+  <div class="card__details">
+      <div class="flex flex-row">
+        <h2 class="card__title max-w-[18rem]">{{menu.nom}}</h2>
+      </div>
+    <h4 class="font-light">à {{menu.prix | number: '1.0-0': 'fr-FR'}} MGA</h4>
+  </div>
+</div>

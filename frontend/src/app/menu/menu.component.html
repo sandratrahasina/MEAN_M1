@@ -1,0 +1,14 @@
+<div class="card card__layout max-w-2xs">
+  <img class="card__image w-72 h-56" [src]="menu.photoUrl" [alt]="menu.nom">
+  <div class="card__details">
+    <div>
+      <div class="flex flex-row">
+        <h2 class="card__title">{{menu.nom}}</h2>
+        <span class="numPastel" [ngClass]="{'hidden': ordered === 0}">{{ordered}}</span>
+      </div>
+      <h4>de <a class="link" routerLink="/restaurants/{{menu.restaurant.id}}">{{menu.restaurant.nom}}</a></h4>
+    </div>
+    <h4 class="font-light">à {{menu.prix | number: '1.0-0': 'fr-FR'}} MGA</h4>
+    <button class="cta w-full mt-2" type="button" (click)="onAddMenu()">Ajouter</button>
+  </div>
+</div>

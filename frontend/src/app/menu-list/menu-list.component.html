@@ -1,0 +1,19 @@
+<div class="flex flex-col items-stretch justify-start h-full">
+  <div class="flex flex-col items-center justify-center w-full h-full grow" *ngIf="loading && !error.isError">
+    <div class="load" ></div>
+    <p>À la recherche des informations</p>
+  </div>
+  <div class="flex-wrap w-full h-full m-4 grow card__list" *ngIf="!loading && !error.isError">
+    <div *ngFor="let menu of menus" class="mb-4">
+      <app-menu [menu]="menu"></app-menu>
+    </div>
+  </div>
+  <div *ngIf="error.isError" class="flex items-center justify-center h-full grow">
+    <div class="">
+      <h1 class="text-6xl font-semibold text-center">Erreur 404</h1>
+      <p class="mt-6 text-center">
+        {{error.message}}
+      </p>
+    </div>
+  </div>
+</div>

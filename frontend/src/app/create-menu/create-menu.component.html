@@ -1,0 +1,43 @@
+<form class="form">
+  <h1>Un nouveau menu ? Dites-nous en plus</h1>
+  <div class="formElement">
+    <label class="formLabel" for="nom">
+      Quel est le nom de ce menu ?
+    </label>
+    <input class="formField" type="text" id="nom" name="nom" [(ngModel)]="nom">
+  </div>
+  <div class="formElement">
+    <label class="formLabel" for="prix">
+      Et son prix ?
+    </label>
+    <input class="formField" type="number" min="100" step="100" id="prix" name="prix" [(ngModel)]="prix">
+  </div>
+  <div class="formElement">
+      <label class="formLabel" for="photo">
+        Une belle photo du plat
+      </label>
+      <input class="formField" type="file" id="photo" name="photo" (change)="onFileChanged($event)">
+    </div>
+    <div class="flex flex-row justify-start items-center mb-4">
+      <label class="mr-2" for="visible">
+        Ce menu sera-t-il tout de suite visible ?
+      </label>
+      <input
+      class="outline-none rounded-lg bg-gray-100 h-6 w-6 text-sm font-light"
+      type="checkbox"
+      id="visible"
+      name="visible"
+      [(ngModel)]="visible"
+      (change)="onVisibleChanged($event)">
+    </div>
+  <div class="formAction">
+    <span class="error" *ngIf="error">{{errorMessage}}</span>
+    <button class="mb-3 cta w-52" type="button" (click)="onValid()">
+      <div class="smallLoad mr-2" [ngClass]="{ 'hidden': step !== 'wait'}"></div>
+      Créer le menu
+    </button>
+    <button class="secondAction w-52" type="button" (click)="onCancel()">
+      Annuler la création
+    </button>
+  </div>
+</form>

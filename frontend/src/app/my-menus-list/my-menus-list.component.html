@@ -1,0 +1,34 @@
+<div class="flex flex-row items-stretch justify-end p-6 grow">
+  <div class="flex flex-col items-stretch justify-start pt-6 pl-6 bg-white grow rounded-2xl">
+    <h2 class="mb-6 text-2xl font-semibold text-center">Les menus public</h2>
+    <div
+      class="flex flex-row flex-wrap items-center justify-start grow"
+      cdkDropList
+      #visibleList="cdkDropList"
+      [cdkDropListData]="visibleMenus"
+      [cdkDropListConnectedTo]="[nonVisibleList]"
+      (cdkDropListDropped)="onDrop($event)">
+        <app-my-menu
+        class="mb-6"
+        *ngFor="let menu of visibleMenus"
+        [menu]="menu"
+        cdkDrag></app-my-menu>
+    </div>
+  </div>
+  <div class="flex flex-col items-stretch justify-start p-6 ml-6 bg-white rounded-2xl">
+    <h2 class="mb-6 text-2xl font-semibold text-center">Les menus masqués</h2>
+    <div
+      class="flex flex-row flex-wrap items-center max-w-6xl justify-evenly"
+      cdkDropList
+      #nonVisibleList="cdkDropList"
+      [cdkDropListData]="nonVisibleMenus"
+      [cdkDropListConnectedTo]="[visibleList]"
+      (cdkDropListDropped)="onDrop($event)">
+        <app-my-menu
+        class="mb-6"
+        *ngFor="let menu of nonVisibleMenus"
+        [menu]="menu"
+        cdkDrag></app-my-menu>
+    </div>
+  </div>
+</div>

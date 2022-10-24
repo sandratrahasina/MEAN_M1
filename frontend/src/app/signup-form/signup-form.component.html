@@ -1,0 +1,108 @@
+<form class="flex flex-row items-center justify-between form" enctype="multipart/form-data">
+  <div class="max-w-sm" [ngClass]="{ 'hidden': step !== 'userType'}">
+    <h1 class="formHeader">Heureux de vous recevoir</h1>
+    <div class="flex flex-col items-center justify-start">
+      <label class="tracking-wide formLabel" for="userType">
+        Premièrement nous voulons savoir le type de compte que vous souhaitez
+      </label>
+      <select class="selectField" name="userType" id="userType" [(ngModel)]="usertype">
+        <option *ngFor="let usertype of userTypes" [ngValue]="usertype">{{usertype}}</option>
+      </select>
+    </div>
+    <div class="formAction">
+      <button class="mb-3 cta w-52" type="button" (click)="onNextStep(usertype !== 'admin' ? 'userInfos' : 'userLogin')">
+        Suivant
+      </button>
+    </div>
+  </div>
+
+  <div class="load" [ngClass]="{ 'hidden': step !== 'loading'}"></div>
+
+  <div [ngClass]="{ 'hidden': step !== 'userInfos'}">
+    <h1 class="formHeader">Entrez vos informations</h1>
+    <div class="formElement">
+      <label class="formLabel" for="nom">
+        {{usertype === 'restaurant' ? 'Le nom de votre restaurant' : 'Votre nom'}}
+      </label>
+      <input class="formField" type="text" id="nom" name="nom" [(ngModel)]="nom">
+    </div>
+    <div class="formElement" [ngClass]="{'hidden': usertype === 'restaurant'}">
+      <label class="formLabel" for="prenom">
+        Votre prénom
+      </label>
+      <input class="formField" type="text" id="prenom" name="prenom" [(ngModel)]="prenom">
+    </div>
+    <div class="formElement" [ngClass]="{'hidden': usertype === 'livreur'}" >
+      <label class="formLabel" for="adresse">
+        Votre adresse
+      </label>
+      <input class="formField" type="text" id="adresse" name="adresse" [(ngModel)]="adresse">
+    </div>
+    <div class="formElement" [ngClass]="{'hidden': usertype !== 'restaurant'}" >
+      <label class="formLabel" for="description">
+        Une petite description ?
+      </label>
+      <textarea
+        class="formField"
+        id="description"
+        name="description"
+        [(ngModel)]="description"
+        cols="30"
+        rows="10">
+      </textarea>
+    </div>
+    <div class="formElement">
+      <label class="formLabel" for="photo">
+        {{usertype === 'restaurant' ? 'Une belle photo pour votre couverture' : 'La photo pour votre profile'}}
+      </label>
+      <input class="formField" type="file" id="photo" name="photo" (change)="onFileChanged($event)">
+    </div>
+    <div class="formAction">
+      <button class="mb-3 cta w-52" type="button" (click)="onNextStep('userLogin')">
+        Suivant
+      </button>
+      <button class="secondAction w-52" type="button" (click)="onNextStep('userType')">
+        Précedent
+      </button>
+    </div>
+  </div>
+
+  <div [ngClass]="{ 'hidden': step !== 'userLogin' && step !== 'wait'}">
+    <h1 class="formHeader">Dernière étape</h1>
+    <div class="formElement">
+      <label class="formLabel" for="email">Adresse mail</label>
+      <input class="formField" type="email" id="email" name="email" [(ngModel)]="email">
+    </div>
+    <div class="formElement">
+      <label class="formLabel" for="password">Mot de passe</label>
+      <input class="formField" type="password" id="password" name="motDePasse" [(ngModel)]="motDePasse">
+    </div>
+    <div class="formElement">
+        <label class="formLabel" for="confirmpassword">
+          Confirmer le mot de passe
+        </label>
+        <input
+          type="password"
+          id="confirmpassword"
+          name="confirmmotDePasse"
+          class="formField"
+          [ngClass]="{ 'fieldError': !passwordError }"
+          [(ngModel)]="confirmMotDePasse"
+          (ngModelChange)="onPasswordConfirm()"
+        >
+        <span class="error" *ngIf="error">{{errorMessage}}</span>
+    </div>
+    <div class="formAction">
+      <button
+      class="flex flex-row items-center mb-3 validButton w-52 justify-evenly"
+      [ngClass]="{ 'py-4': step !== 'wait', 'py-3': step === 'wait'}"
+      type="button" (click)="onSubmitForm()">
+        <div class="mr-2 smallLoad" [ngClass]="{ 'hidden': step !== 'wait'}"></div>
+        Valider
+      </button>
+      <button class="secondAction w-52" type="button" (click)="onNextStep(usertype !== 'admin' ? 'userInfos' : 'userType')">
+        Précedent
+      </button>
+    </div>
+  </div>
+</form>

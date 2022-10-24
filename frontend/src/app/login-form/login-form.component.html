@@ -1,0 +1,31 @@
+<form class="form ">
+  <h1 class="formHeader">Heureux de vous revoir</h1>
+  <div class="flex flex-col justify-start items-stretch mb-6">
+    <label class="formLabel tracking-wide" for="userType">
+      Se connecter en tant que
+    </label>
+    <select class="selectField" name="userType" id="userType" [(ngModel)]="usertype">
+      <option *ngFor="let usertype of userTypes" [ngValue]="usertype">{{usertype}}</option>
+    </select>
+  </div>
+  <div class="formElement">
+    <label class="formLabel" for="email">Adresse email</label>
+    <input class="formField" type="email" id="email" name="email" [(ngModel)]="email">
+  </div>
+  <div class="formElement">
+    <label class="formLabel" for="password">Mot de passe</label>
+    <input class="formField" type="password" id="password" name="motDePasse" [(ngModel)]="motDePasse">
+    <span class="error" *ngIf="error">{{errorMessage}}</span>
+  </div>
+  <div class="formAction">
+    <button
+    class="validButton w-52 mb-3 flex flex-row items-center justify-evenly"
+    [ngClass]="{ 'py-4': step !== 'wait', 'py-3': step === 'wait'}"
+    type="button"
+    (click)="onSubmitForm()">
+      <div class="smallLoad mr-2" [ngClass]="{ 'hidden': step !== 'wait'}"></div>
+      Se connecter
+    </button>
+    <button class="secondAction w-52">Annuler</button>
+  </div>
+</form>

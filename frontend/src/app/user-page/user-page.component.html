@@ -1,0 +1,24 @@
+<div class="h-full">
+  <div class="flex flex-col justify-start w-full h-full grow" *ngIf="userType !== 'error'">
+      <h1
+      class="w-full py-6 text-2xl font-semibold text-center bg-white shadow outline-none"
+      contenteditable>
+        Nous vous souhaitons la bienvenue chez nous.
+        À votre guise, votre espace, vos règles.
+      </h1>
+      <div class="grow bg-slate-200">
+        <app-user-admin *ngIf="userType === 'admin'"></app-user-admin>
+        <app-user-client *ngIf="userType === 'client'"></app-user-client>
+        <app-user-livreur *ngIf="userType === 'livreur'"></app-user-livreur>
+        <app-user-restaurant *ngIf="userType === 'restaurant'"></app-user-restaurant>
+      </div>
+  </div>
+  <div *ngIf="userType === 'error'" class="flex items-center justify-center w-full h-full grow">
+    <div>
+      <h1 class="text-6xl font-semibold text-center">Erreur 404</h1>
+      <p class="mt-6 text-center">
+        Nous n'avons pas pu trouver les informations que vous recherchez
+      </p>
+    </div>
+  </div>
+</div>

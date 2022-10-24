@@ -1,0 +1,93 @@
+type Client {
+  adresse: String
+  commandes: [Commande]
+  id: String!
+  nom: String
+  photoUrl: String
+  prenom: String
+}
+
+type Commande {
+  client: Client
+  date: Date
+  details: [CommandeDetails]
+  etat: Etat
+  id: String
+  livreur: Livreur
+}
+
+type CommandeDetails {
+  menu: MenuReturnedType
+  quantite: Int
+}
+
+input CommandeDetailsInput {
+  menuId: String!
+  quantite: Int
+}
+
+enum Etat {
+  ANNULEE
+  ATTENTE
+  LIVREE
+}
+
+type File {
+  encoding: String!
+  filename: String!
+  mimetype: String!
+}
+
+type Livreur {
+  id: String!
+  livraisons: [Commande]
+  nom: String
+  prenom: String
+}
+
+type Menu {
+  id: String
+  nom: String
+  photoUrl: String
+  prix: Int
+  restaurant: Restaurant
+  visible: Boolean
+}
+
+type MenuReturnedType {
+  id: String
+  nom: String
+  photoUrl: String
+  prix: Int
+  restaurant: Restaurant
+}
+
+type Mutation {
+  cancelOrder(commandeId: String!): Commande
+  changeMenuVisibility(menuId: String!, visible: Boolean!): Menu
+  createMenu(imageFile: Upload, nom: String!, prix: Int!, visible: Boolean): Menu
+  deleteMenu(menuId: String!): Menu
+  deliverOrder(commandeId: String!): Commande
+  makeOrder(menus: [CommandeDetailsInput!]!): Commande
+  updateMenu(menuId: String!, nom: String, prix: Int): Menu
+}
+
+type Query {
+  menus: [MenuReturnedType]
+  menusByRestaurant(restaurantId: String!): [Menu]
+  myCommands: [Commande]
+  myMenus: [Menu]
+  receivedCommands: [Commande]
+  restaurant(restaurantId: String!): Restaurant
+  restaurants: [Restaurant]
+}
+
+type Restaurant {
+  adresse: String
+  description: String
+  id: String!
+  nom: String!
+  photoUrl: String
+}
+
+scalar Upload

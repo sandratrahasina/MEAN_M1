@@ -1,0 +1,13 @@
+<div class="cardBase p-3 flex flex-row justify-start w-96 bg-white">
+  <img class="card__image w-24 h-24 rounded-lg" src="https://cdn.pixabay.com/photo/2017/09/28/20/49/plaice-2796910_960_720.jpg" alt="fried fish">
+  <div class="ml-3 flex flex-col justify-start">
+    <div class="flex flex-row-reverse justify-end items-start">
+      <span class='numPastel'>{{commande.quantite | number: '1.0-0'}}</span>
+      <h2 class="card__title">{{commande.menu.nom}}</h2>
+    </div>
+    <h4 class="text-base">de
+      <a class="link">{{commande.menu.restaurant.nom}}</a>
+    </h4>
+    <h4 class="font-light">à {{commande.menu.prix | number: '1.0-0': 'fr-Fr'}} MGA</h4>
+  </div>
+</div>
